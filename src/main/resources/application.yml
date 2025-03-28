@@ -48,8 +48,8 @@ mybatis-plus:
   mapper-locations: classpath:mapper/**/*.xml
 
   # 全局数据库配置
-  global-config:
-    db-config:
+  # global-config:
+    # db-config:
       # 主键类型，默认 AUTO 表示自增（适用于 MySQL 的 AUTO_INCREMENT）
       # 可选值：UUID（生成 UUID）、INPUT（手动输入）
       #id-type: AUTO
