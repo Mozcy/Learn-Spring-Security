@@ -80,6 +80,12 @@
             <artifactId>jjwt</artifactId>
             <version>0.9.1</version>
         </dependency>
+        <!-- JAXB 依赖, 解决 DatatypeConverter 问题 -->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.1</version>
+        </dependency>
         <!--fastjson依赖-->
         <dependency>
             <groupId>com.alibaba</groupId>
