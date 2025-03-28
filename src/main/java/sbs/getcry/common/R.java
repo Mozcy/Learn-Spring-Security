@@ -1,4 +1,4 @@
-package sbs.getcry.utils;
+package sbs.getcry.common;
 
 import lombok.Data;
 import org.springframework.http.HttpStatus;
