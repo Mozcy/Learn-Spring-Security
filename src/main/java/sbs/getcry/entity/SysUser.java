@@ -1,6 +1,7 @@
 package sbs.getcry.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.ToString;
 
@@ -15,6 +16,8 @@ public class SysUser {
     private String nickName;    // 用户昵称
     private String sex;         // 用户性别（0男 1女 2未知）
     private String avatar;      // 头像地址
+    // 只写入, 不返回(会接收前端过来的数据, 但不会返回给前端)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;    // 密码
     private String status;      // 帐号状态（0正常 1停用）
     private String delFlag;     // 删除标志（0代表存在 1代表删除）
