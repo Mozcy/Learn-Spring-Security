@@ -10,8 +10,8 @@ import java.util.Map;
 
 public class JWTUtils {
 
-    private static final String SECRET_KEY = "sbs.getCry";   // 加密秘钥
-    public static final long EXPIRATION_TIME = 10 * 1000L;   // 10秒过期时间
+    private static final String SECRET_KEY = "sbs.getCry";        // 加密秘钥
+    public static final long EXPIRATION_TIME = 60 * 60 * 1000L;   // 1小时过期时间
 
     /**
      * 生成 HMAC-SHA256 签名的 JWT Token
