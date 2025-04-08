@@ -1,6 +1,7 @@
 package sbs.getcry.config;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.parser.ParserConfig;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.SerializationException;
@@ -18,6 +19,8 @@ public class FastJsonRedisSerializer<T> implements RedisSerializer<T> {
 
     public FastJsonRedisSerializer(Class<T> clazz) {
         this.clazz = clazz;
+        // 将 bo 包下面的所有类, 加入到允许反序列化的白名单中
+        ParserConfig.getGlobalInstance().addAccept("sbs.getcry.bo.");
     }
 
     @Override
