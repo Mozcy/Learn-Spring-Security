@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import sbs.getcry.bo.LoginUserDetails;
 import sbs.getcry.common.R;
 import sbs.getcry.common.TokenService;
+import sbs.getcry.dto.SysUserDTO;
 import sbs.getcry.entity.SysUser;
 import sbs.getcry.mapper.SysUserMapper;
 import sbs.getcry.service.UserService;
@@ -99,19 +100,27 @@ public class UserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impleme
     /**
      * 注册实现
      *
-     * @param sysUser
+     * @param sysUserDTO
      * @return
      */
     @Override
     @Transactional
-    public R register(SysUser sysUser) {
+    public R register(SysUserDTO sysUserDTO) {
         QueryWrapper queryWrapper = new QueryWrapper<SysUser>();
-        queryWrapper.eq("user_name", sysUser.getUserName());
+        queryWrapper.eq("user_name", sysUserDTO.getUserName());
         if (exists(queryWrapper)) {
             return R.fail("注册失败, 用户名已存在!", null);
         }
-        String encodePassword = passwordEncoder.encode(sysUser.getPassword());
+        String encodePassword = passwordEncoder.encode(sysUserDTO.getPassword());
+        sysUserDTO.setPassword(encodePassword);
+        // 创建用户实体类
+        SysUser sysUser = new SysUser();
+        sysUser.setUserName(sysUserDTO.getUserName());
         sysUser.setPassword(encodePassword);
+        sysUser.setNickName(sysUserDTO.getNickName());
+        sysUser.setSex(sysUserDTO.getSex());
+        sysUser.setAvatar(sysUserDTO.getAvatar());
+        // 写入到数据库中
         if (!save(sysUser)) {
             return R.fail("注册失败, 未知错误!", null);
         }

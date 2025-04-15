@@ -5,6 +5,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import sbs.getcry.common.R;
+import sbs.getcry.dto.SysUserDTO;
 import sbs.getcry.entity.SysUser;
 import sbs.getcry.service.UserService;
 
@@ -40,12 +41,12 @@ public class UserController {
     /**
      * 注册API
      *
-     * @param sysUser
+     * @param sysUserDTO
      * @return
      */
     @PostMapping("/register")
-    public R register(@RequestBody @Valid SysUser sysUser) {
-        return userService.register(sysUser);
+    public R register(@RequestBody @Valid SysUserDTO sysUserDTO) {
+        return userService.register(sysUserDTO);
     }
 
     /**

@@ -3,6 +3,7 @@ package sbs.getcry.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import jakarta.servlet.http.HttpServletRequest;
 import sbs.getcry.common.R;
+import sbs.getcry.dto.SysUserDTO;
 import sbs.getcry.entity.SysUser;
 
 public interface UserService extends IService<SysUser> {
@@ -26,10 +27,10 @@ public interface UserService extends IService<SysUser> {
     /**
      * 注册
      *
-     * @param sysUser
+     * @param sysUserDTO
      * @return
      */
-    R register(SysUser sysUser);
+    R register(SysUserDTO sysUserDTO);
 
     /**
      * 获取用户信息

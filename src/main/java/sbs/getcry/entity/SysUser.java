@@ -16,14 +16,11 @@ import java.util.Date;
 public class SysUser {
     @TableId(type = IdType.AUTO)
     private Long userId;        // 用户ID
-    @NotBlank(message = "账号不能为空")
     private String userName;    // 用户账号
-    @NotBlank(message = "昵称不能为空")
     private String nickName;    // 用户昵称
     private String sex;         // 用户性别（0男 1女 2未知）
     private String avatar;      // 头像地址
     // 只写入, 不返回(会接收前端过来的数据, 但不会返回给前端)
-    @NotBlank(message = "密码不能为空")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;    // 密码
     private String status;      // 帐号状态（0正常 1停用）
