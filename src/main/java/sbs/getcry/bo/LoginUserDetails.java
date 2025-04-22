@@ -3,11 +3,13 @@ package sbs.getcry.bo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import sbs.getcry.entity.SysUser;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Author : saeko
@@ -19,7 +21,8 @@ import java.util.List;
 @AllArgsConstructor
 public class LoginUserDetails implements UserDetails {
 
-    private SysUser sysUser;
+    private SysUser sysUser;          // 用户信息
+    private List<String> permissions; // 用户的权限集合
 
     /**
      * 获取当前用户的权限信息（角色/权限）
@@ -28,7 +31,7 @@ public class LoginUserDetails implements UserDetails {
      */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return permissions.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
 
     /**
