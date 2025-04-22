@@ -33,6 +33,13 @@ public interface UserService extends IService<SysUser> {
     R register(SysUserDTO sysUserDTO);
 
     /**
+     * 删除用户
+     * @param userId
+     * @return
+     */
+    R delete(long userId);
+
+    /**
      * 获取用户信息
      *
      * @return

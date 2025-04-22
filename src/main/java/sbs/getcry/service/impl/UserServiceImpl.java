@@ -128,6 +128,23 @@ public class UserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impleme
     }
 
     /**
+     * 通过userId删除用户
+     *
+     * @param userId
+     * @return
+     */
+    @Override
+    public R delete(long userId) {
+        if (userId == 1) {
+            return R.fail("禁止删除系统管理员!");
+        } else if (removeById(userId)) {
+            // 注意: 这删除用户后, 需要清除 Redis 中的登录用户信息, 测试就不做演示了! 实绩开发中需要注意
+            return R.ok("删除成功");
+        }
+        return R.fail(String.format("删除失败, 用户ID [%d] 不存在!", userId));
+    }
+
+    /**
      * 获取用户信息实现
      *
      * @return
