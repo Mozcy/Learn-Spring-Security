@@ -1,5 +1,6 @@
 package sbs.getcry.exception;
 
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -18,9 +19,9 @@ public class GlobalExceptionHandler {
      * @param e
      * @return
      */
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public R handleValidException(MethodArgumentNotValidException e) {
-        String errorMsg = e.getBindingResult().getFieldError().getDefaultMessage();
+    @ExceptionHandler({MethodArgumentNotValidException.class, ConstraintViolationException.class})
+    public R handleValidException(Exception e) {
+        String errorMsg = e.getLocalizedMessage();
         return R.fail(errorMsg);
     }
 }

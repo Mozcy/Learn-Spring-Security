@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.ExceptionTranslationFilter;
+import sbs.getcry.exception.CustomAccessDeniedHandler;
 import sbs.getcry.exception.JwtAuthenticationExceptionHandler;
 import sbs.getcry.filter.JwtAuthenticationFilter;
 
@@ -21,6 +22,9 @@ public class SecurityConfig {
 
     @Autowired
     private JwtAuthenticationExceptionHandler jwtAuthenticationExceptionHandler;
+
+    @Autowired
+    private CustomAccessDeniedHandler customAccessDeniedHandler;
 
     /**
      * BCrypt加密器
@@ -67,9 +71,10 @@ public class SecurityConfig {
         // 将自定义的过滤器 authenticationTokenFilter 插入到 ExceptionTranslationFilter 之后执行
         http.addFilterAfter(jwtAuthenticationFilter, ExceptionTranslationFilter.class);
 
-        // 设置异常处理
+        // 设置认证失败异常 和 权限不足异常的处理
         http.exceptionHandling(ex ->
-                ex.authenticationEntryPoint(jwtAuthenticationExceptionHandler));
+                ex.authenticationEntryPoint(jwtAuthenticationExceptionHandler).accessDeniedHandler(customAccessDeniedHandler)
+        );
 
         return http.build();
     }
